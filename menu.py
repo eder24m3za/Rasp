@@ -1,6 +1,6 @@
 from Led import Led as Led
-from Ultrasonico import ultrasonico
-from Temperatura import temperatura as temp
+from Ultrasonico import Ultrasonico as ultrasonico
+from Temperatura import Temperatura as temp
 class interfaz:
     def __init__(self): 
         super().__init__()
