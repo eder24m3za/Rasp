@@ -12,6 +12,18 @@ class interfaz:
     def temperatura():
         temp.temperatura()
         
+    def arduinoSerial(self, nombre):
+        ser = serial.Serial('/dev/ttyACM0', 9600) # Reemplaza '/dev/ttyACM0' por el puerto serial en el que está conectado el Arduino
+        signal =b''+nombre
+        ser.write(signal)
+        ser.close()
+        puerto = '/dev/ttyUSB0'  # Reemplaza '/dev/ttyUSB0' por el puerto en el que está conectado tu Arduino
+        arduino = serial.Serial(puerto, baudrate=9600, timeout=1)
+        while True:
+            mensaje = arduino.readline()
+            if mensaje:
+                print(mensaje.decode('utf-8'))
+        
 
     
 
@@ -21,7 +33,8 @@ if __name__=='__main__':
         print("1-leer sensor ultrasonico")
         print("2-leer temperatura y humedad")
         print("3-prender o apagar un led")
-        print("4-salir")
+        print('4-leer sensor de luz')
+        print("5-salir")
         res = input("Que deseas hacer?")
         res = int (res)
         if res == 1:
@@ -31,6 +44,6 @@ if __name__=='__main__':
         elif res == 3:
             interfaz.led()
         elif res == 4:
-            print("Good bye!!!")
+            interfaz.arduinoSerial('Luz')
         else:
             print("Opcion invalida")
